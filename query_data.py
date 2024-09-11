@@ -27,7 +27,7 @@ system_prompt = (
 
 
 
-def query_rag():
+def query_rag(input_text):
     embedding_function=get_embedding_function()
     db=Chroma(embedding_function=embedding_function,persist_directory=CHROMA_PATH)
     retriever=db.as_retriever()
@@ -44,11 +44,11 @@ def query_rag():
     question_answer_chain = create_stuff_documents_chain(llm, prompt)
     rag_chain = create_retrieval_chain(retriever, question_answer_chain)
 
-    response=rag_chain.invoke({"input":"What is the full form of DBMS"})
-    response['answer']
+    # Invoke the RAG chain with user input
+    response = rag_chain.invoke({"input": input_text})
     return response['answer']
 
 
 if __name__=="__main__":
-    response=query_rag()
+    response=query_rag("What is the full form of DBMS")
     print(response)
