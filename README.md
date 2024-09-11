@@ -24,3 +24,8 @@ For terminal testing
 ```
 python query_data.py
 ```
+
+Run the app
+```
+streamlit run app.py
+```
